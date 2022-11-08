@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import React, {useState, useEffect} from "react";
+import {Form} from "./components/Form"
 import './App.css';
+import PropagateLoader from "react-spinners/PropagateLoader";
 
 function App() {
+    const [isLoading, setIsLoading] = useState(false);
+    useEffect(()=> {
+      setIsLoading(true)
+      setTimeout(()=>{
+        setIsLoading(false)
+      },4000)
+    },[])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      {  isLoading ? (
+       <div className="loader"> <PropagateLoader
+        color={"white"}
+        loading={isLoading}
+        size={15}
+       
+      /> </div>
+      )  : 
+      (
+        <Form />
+      )  
+      }
+      
+      
     </div>
   );
 }
